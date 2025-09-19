@@ -491,6 +491,20 @@ const closeModal = () => {
   }
 }
 
+.coordinates-section {
+  .coordinate-group {
+    margin-bottom: 12px;
+    
+    .coordinate-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: $text-secondary;
+      font-weight: 500;
+    }
+  }
+}
+
 .location-inputs {
   display: flex;
   gap: $spacing-sm;
