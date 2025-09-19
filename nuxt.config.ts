@@ -1,4 +1,5 @@
 import Icons from "unplugin-icons/vite";
+import { config } from "./config";
 
 export default defineNuxtConfig({
   devtools: { enabled: false },
@@ -38,17 +39,13 @@ export default defineNuxtConfig({
         {
           innerHTML: `
             window._AMapSecurityConfig = {
-              securityJsCode: "${
-                process.env.AMAP_SECRET || "6171dc6a7993ecde4079b2646d36f5bb"
-              }",
+              securityJsCode: "${config.amap.secret}",
             };
           `,
           type: "text/javascript",
         },
         {
-          src: `https://webapi.amap.com/maps?v=2.0&key=${
-            process.env.AMAP_KEY || "95b533dc58b44f3cbae93cd9efff0858"
-          }`,
+          src: `https://webapi.amap.com/maps?v=${config.amap.version}&key=${config.amap.key}`,
           defer: true,
         },
       ],

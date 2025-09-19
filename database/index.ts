@@ -20,7 +20,12 @@ async function apiRequest<T>(
     const error = await response
       .json()
       .catch(() => ({ message: "Unknown error" }));
-    throw new Error(error.message || `HTTP ${response.status}`);
+    const errorMessage = error.message || `HTTP ${response.status}`;
+    console.error(`API Error: ${errorMessage}`, {
+      url,
+      status: response.status,
+    });
+    throw new Error(errorMessage);
   }
 
   return response.json();
@@ -62,9 +67,15 @@ export const tripDb = {
     try {
       return await apiRequest<Trip>(`${API_BASE}/${id}`);
     } catch (error) {
-      if (error instanceof Error && error.message.includes("404")) {
+      if (
+        error instanceof Error &&
+        (error.message.includes("404") ||
+          error.message.includes("Trip not found"))
+      ) {
+        console.warn(`Trip not found: ${id}`);
         return undefined;
       }
+      console.error(`Failed to get trip ${id}:`, error);
       throw error;
     }
   },

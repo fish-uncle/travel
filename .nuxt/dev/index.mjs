@@ -700,9 +700,9 @@ getContext("nitro-app", {
   AsyncLocalStorage: void 0
 });
 
-const config = useRuntimeConfig();
+const config$1 = useRuntimeConfig();
 const _routeRulesMatcher = toRouteMatcher(
-  createRouter({ routes: config.nitro.routeRules })
+  createRouter({ routes: config$1.nitro.routeRules })
 );
 function createRouteRulesHandler(ctx) {
   return eventHandler((event) => {
@@ -1100,7 +1100,22 @@ const plugins = [
   _ayjSuCbBIPDs5u_Q33NcMYSyPH1mNLiU2HW6jCXOPo
 ];
 
-const assets = {};
+const assets = {
+  "/index.mjs": {
+    "type": "text/javascript; charset=utf-8",
+    "etag": "\"15073-uIEvkUJGczP9ue+6qRQqZpRmGAs\"",
+    "mtime": "2025-09-19T09:32:02.274Z",
+    "size": 86131,
+    "path": "index.mjs"
+  },
+  "/index.mjs.map": {
+    "type": "application/json",
+    "etag": "\"4c22b-9Sar5y32cR+NmGVvNXC78Cis3pE\"",
+    "mtime": "2025-09-19T09:32:02.274Z",
+    "size": 311851,
+    "path": "index.mjs.map"
+  }
+};
 
 function readAsset (id) {
   const serverDir = dirname$1(fileURLToPath(globalThis._importMeta_.url));
@@ -1860,17 +1875,37 @@ const styles$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   default: styles
 }, Symbol.toStringTag, { value: 'Module' }));
 
+const config = {
+  // 高德地图配置
+  amap: {
+    key: "95b533dc58b44f3cbae93cd9efff0858",
+    secret: "6171dc6a7993ecde4079b2646d36f5bb",
+    version: "2.0"
+  },
+  // SQLite3 配置
+  database: {
+    filename: "trip_planner.db",
+    directory: "./data"
+  },
+  // 应用配置
+  app: {
+    name: "\u6211\u7684\u7EBF\u8DEF",
+    version: "1.0.0",
+    primaryColor: "#0ABFC5"
+  }
+};
+
 let db = null;
 async function connectToDatabase() {
   if (db) {
     return db;
   }
   try {
-    const dbDir = path.join(process.cwd(), "data");
+    const dbDir = path.join(process.cwd(), config.database.directory);
     if (!fs.existsSync(dbDir)) {
       fs.mkdirSync(dbDir, { recursive: true });
     }
-    const dbPath = path.join(dbDir, "trip_planner.db");
+    const dbPath = path.join(dbDir, config.database.filename);
     db = new sqlite3.Database(dbPath);
     await promisify(db.run.bind(db))("PRAGMA foreign_keys = ON");
     await createTables();
@@ -1897,8 +1932,12 @@ async function createTables() {
       deletedAt INTEGER DEFAULT 0
     )
   `);
-  await run("CREATE INDEX IF NOT EXISTS idx_trips_deletedAt ON trips(deletedAt)");
-  await run("CREATE INDEX IF NOT EXISTS idx_trips_updatedAt ON trips(updatedAt)");
+  await run(
+    "CREATE INDEX IF NOT EXISTS idx_trips_deletedAt ON trips(deletedAt)"
+  );
+  await run(
+    "CREATE INDEX IF NOT EXISTS idx_trips_updatedAt ON trips(updatedAt)"
+  );
   await run("CREATE INDEX IF NOT EXISTS idx_trips_title ON trips(title)");
 }
 const dbRun = (db2) => promisify(db2.run.bind(db2));

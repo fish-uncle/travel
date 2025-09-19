@@ -58,8 +58,16 @@ const initMap = async () => {
   });
 
   // 添加地图控件
-  map.addControl(new (window as any).AMap.Scale());
-  map.addControl(new (window as any).AMap.ToolBar());
+  map.addControl(
+    new (window as any).AMap.Scale({
+      position: "LB",
+    })
+  );
+  map.addControl(
+    new (window as any).AMap.ToolBar({
+      position: "RT",
+    })
+  );
 
   // 渲染行程点
   renderTripItems();
@@ -249,6 +257,13 @@ const createInfoWindowContent = (item: Item): string => {
 
 // 获取标记图标
 const getMarkerIcon = (type: string): string => {
+  if (type === "from") {
+    return "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyOCAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTQiIGN5PSIxNCIgcj0iMTIiIGZpbGw9IiM0Q0FGNTAiLz4KPHBhdGggZD0iTTE0IDZMMTggMTBIMTRWMTBaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K";
+  }
+  if (type === "to") {
+    return "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjgiIGhlaWdodD0iMjgiIHZpZXdCb3g9IjAgMCAyOCAyOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTQiIGN5PSIxNCIgcj0iMTIiIGZpbGw9IiNGRjk4MDAiLz4KPHBhdGggZD0iTTE0IDIyTDEwIDE4SDE0VjE4WiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg==";
+  }
+
   const iconMap: Record<string, string> = {
     flight:
       "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2IDJMMjAgOEwyOCA2TDI0IDEyTDI4IDE4TDIwIDE2TDE2IDIyTDEyIDE2TDQgMThMOCAxMkw0IDZMMTIgOEwxNiAyWiIgZmlsbD0iIzBBQkZDNCIvPgo8L3N2Zz4K",
@@ -275,6 +290,47 @@ const getItemTypeText = (type: string): string => {
     other: "其他",
   };
   return typeMap[type] || "其他";
+};
+
+// 创建坐标信息窗口内容
+const createCoordinateInfoWindow = (
+  item: Item,
+  type: "from" | "to"
+): string => {
+  const coords =
+    type === "from" ? item.coordinates?.from : item.coordinates?.to;
+  const label = type === "from" ? "出发地" : "到达地";
+  const location = type === "from" ? item.from : item.to;
+
+  return `
+    <div style="padding: 12px; min-width: 200px;">
+      <div style="font-weight: 600; margin-bottom: 8px; color: #333;">
+        ${label}: ${location || "未知位置"}
+      </div>
+      <div style="font-size: 12px; color: #666; margin-bottom: 8px;">
+        坐标: ${
+          coords
+            ? `${coords.lat.toFixed(6)}, ${coords.lng.toFixed(6)}`
+            : "无坐标"
+        }
+      </div>
+      <div style="font-size: 12px; color: #666; margin-bottom: 8px;">
+        时间: ${item.time || "未设置"}
+      </div>
+      <div style="display: flex; gap: 4px;">
+        <button onclick="navigateToCoordinate('${coords?.lat}', '${
+    coords?.lng
+  }')" 
+                style="padding: 4px 8px; background: #0ABFC5; color: white; border: none; border-radius: 4px; font-size: 12px;">
+          导航
+        </button>
+        <button onclick="editItem('${item.id}')" 
+                style="padding: 4px 8px; background: #666; color: white; border: none; border-radius: 4px; font-size: 12px;">
+          编辑
+        </button>
+      </div>
+    </div>
+  `;
 };
 
 // 清除标记
