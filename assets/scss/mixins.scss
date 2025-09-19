@@ -1,0 +1,121 @@
+// 涟漪效果 mixin
+@mixin ripple-effect {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    pointer-events: none;
+  }
+
+  &:active::before {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+// 按钮基础样式 mixin
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-radius: $radius-md;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all $transition-normal;
+  user-select: none;
+  text-decoration: none;
+  min-height: 48px; // 拇指友好
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// 主要按钮样式
+@mixin button-primary {
+  @include button-base;
+  @include ripple-effect;
+  background: $primary-color;
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: color.adjust($primary-color, $lightness: -10%);
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+}
+
+// 次要按钮样式
+@mixin button-secondary {
+  @include button-base;
+  @include ripple-effect;
+  background: transparent;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+
+  &:hover:not(:disabled) {
+    background: $primary-color;
+    color: white;
+  }
+}
+
+// 危险按钮样式
+@mixin button-danger {
+  @include button-base;
+  @include ripple-effect;
+  background: #ff4757;
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: color.adjust(#ff4757, $lightness: -10%);
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+}
+
+// 圆形按钮样式
+@mixin button-circle {
+  @include button-base;
+  @include ripple-effect;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  padding: 0;
+  min-height: 48px;
+}
+
+// 浮动操作按钮
+@mixin fab {
+  @include button-circle;
+  position: fixed;
+  bottom: $spacing-lg;
+  right: $spacing-lg;
+  background: $primary-color;
+  color: white;
+  box-shadow: $shadow-lg;
+  z-index: 1000;
+
+  &:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: $shadow-xl;
+  }
+}

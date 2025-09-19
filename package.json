@@ -1,0 +1,33 @@
+{
+  "name": "trip-planner-h5",
+  "version": "1.0.0",
+  "description": "携程我的线路同款交互的 Nuxt3 H5 项目",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/tailwindcss": "^6.8.4",
+    "@pinia/nuxt": "^0.5.1",
+    "@vueuse/nuxt": "^10.5.0",
+    "nuxt": "^3.8.0",
+    "sass": "^1.69.5",
+    "typescript": "^5.2.2",
+    "unplugin-icons": "^22.3.0"
+  },
+  "dependencies": {
+    "@vee-validate/nuxt": "^4.11.8",
+    "@vee-validate/yup": "^4.11.8",
+    "dayjs": "^1.11.10",
+    "lottie-web": "^5.12.2",
+    "sqlite3": "^5.1.6",
+    "vant": "^4.9.21",
+    "vue-virtual-scroller": "^2.0.0-beta.8",
+    "yup": "^1.3.3"
+  }
+}
