@@ -99,6 +99,7 @@ const renderTripItems = () => {
 
   // 创建标记
   allItems.forEach((item, index) => {
+    // 处理单个坐标点
     if (item.lat && item.lng) {
       const marker = new (window as any).AMap.Marker({
         position: [item.lng, item.lat],
@@ -124,6 +125,61 @@ const renderTripItems = () => {
 
       map.add(marker);
       markers.push(marker);
+    }
+
+    // 处理坐标对（出发地和到达地）
+    if (item.coordinates) {
+      // 出发地标记
+      if (item.coordinates.from) {
+        const fromMarker = new (window as any).AMap.Marker({
+          position: [item.coordinates.from.lng, item.coordinates.from.lat],
+          title: `${item.from || '出发地'} - ${item.address || ''}`,
+          icon: new (window as any).AMap.Icon({
+            size: new (window as any).AMap.Size(28, 28),
+            image: getMarkerIcon('from'),
+            imageSize: new (window as any).AMap.Size(28, 28),
+          }),
+        });
+
+        const fromInfoWindow = new (window as any).AMap.InfoWindow({
+          content: createCoordinateInfoWindow(item, 'from'),
+          offset: new (window as any).AMap.Pixel(0, -30),
+        });
+
+        fromMarker.on("click", () => {
+          fromInfoWindow.open(map, fromMarker.getPosition());
+          emit("itemClick", item);
+        });
+
+        map.add(fromMarker);
+        markers.push(fromMarker);
+      }
+
+      // 到达地标记
+      if (item.coordinates.to) {
+        const toMarker = new (window as any).AMap.Marker({
+          position: [item.coordinates.to.lng, item.coordinates.to.lat],
+          title: `${item.to || '到达地'} - ${item.address || ''}`,
+          icon: new (window as any).AMap.Icon({
+            size: new (window as any).AMap.Size(28, 28),
+            image: getMarkerIcon('to'),
+            imageSize: new (window as any).AMap.Size(28, 28),
+          }),
+        });
+
+        const toInfoWindow = new (window as any).AMap.InfoWindow({
+          content: createCoordinateInfoWindow(item, 'to'),
+          offset: new (window as any).AMap.Pixel(0, -30),
+        });
+
+        toMarker.on("click", () => {
+          toInfoWindow.open(map, toMarker.getPosition());
+          emit("itemClick", item);
+        });
+
+        map.add(toMarker);
+        markers.push(toMarker);
+      }
     }
   });
 
