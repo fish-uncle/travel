@@ -133,16 +133,16 @@ const renderTripItems = () => {
       if (item.coordinates.from) {
         const fromMarker = new (window as any).AMap.Marker({
           position: [item.coordinates.from.lng, item.coordinates.from.lat],
-          title: `${item.from || '出发地'} - ${item.address || ''}`,
+          title: `${item.from || "出发地"} - ${item.address || ""}`,
           icon: new (window as any).AMap.Icon({
             size: new (window as any).AMap.Size(28, 28),
-            image: getMarkerIcon('from'),
+            image: getMarkerIcon("from"),
             imageSize: new (window as any).AMap.Size(28, 28),
           }),
         });
 
         const fromInfoWindow = new (window as any).AMap.InfoWindow({
-          content: createCoordinateInfoWindow(item, 'from'),
+          content: createCoordinateInfoWindow(item, "from"),
           offset: new (window as any).AMap.Pixel(0, -30),
         });
 
@@ -159,16 +159,16 @@ const renderTripItems = () => {
       if (item.coordinates.to) {
         const toMarker = new (window as any).AMap.Marker({
           position: [item.coordinates.to.lng, item.coordinates.to.lat],
-          title: `${item.to || '到达地'} - ${item.address || ''}`,
+          title: `${item.to || "到达地"} - ${item.address || ""}`,
           icon: new (window as any).AMap.Icon({
             size: new (window as any).AMap.Size(28, 28),
-            image: getMarkerIcon('to'),
+            image: getMarkerIcon("to"),
             imageSize: new (window as any).AMap.Size(28, 28),
           }),
         });
 
         const toInfoWindow = new (window as any).AMap.InfoWindow({
-          content: createCoordinateInfoWindow(item, 'to'),
+          content: createCoordinateInfoWindow(item, "to"),
           offset: new (window as any).AMap.Pixel(0, -30),
         });
 
