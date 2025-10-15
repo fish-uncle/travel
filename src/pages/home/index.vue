@@ -8,7 +8,7 @@ import top from "./components/top.vue";
 </script>
 <style lang="scss" scoped>
 .container {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
 }
 </style>
