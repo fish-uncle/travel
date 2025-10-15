@@ -1,55 +1,19 @@
-# 20251003
+<p>
+  <a href="mailto:fishuncle@126.com">
+    <img src="https://img.shields.io/badge/126邮箱-fishuncle%40126.com-red?logo=gmail&logoColor=white" />
+  </a>
+  <a href="https://v.douyin.com/lfD47khjka4/ 0@4.com">
+    <img src="https://img.shields.io/badge/抖音号-fish.uncle-white?logo=tiktok" />
+  </a>
+  <a href="https://xhslink.com/m/2qoC2XuYMRc">
+    <img src="https://img.shields.io/badge/小红书-fish__uncle-red?logo=xiaohongshu" />
+  </a>
+  <a href="https://b23.tv/cqwOuLj">
+    <img src="https://img.shields.io/badge/哔哩哔哩-Fish__Uncle-blue?logo=bilibili" />
+  </a>
+  <img src="https://img.shields.io/badge/视频号-Fish.Uncle-brightgreen?logo=wechat" />
+</p>
 
-## 马尔代夫
+# 预览
 
-# 20241002
-
-## 海南
-
-# 20240824
-
-## 神仙居
-
-# 20240629
-
-## 东极岛
-
-# 20240531
-
-## 千岛湖
-
-# 20240526
-
-## 盐官
-
-# 20231223
-
-## 大明山
-
-# 20230513
-
-## 南浔古镇
-
-# 20230405
-
-## 蜈支洲
-
-# 20230405
-
-## 后海
-
-# 20230403
-
-## 三亚
-
-# 20221004
-
-## 重庆
-
-# 20220930
-
-## 万州
-
-# 20211005
-
-## 上海
+[https://fish-uncle.github.io/travel/dist](https://fish-uncle.github.io/travel/dist)
