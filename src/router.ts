@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, type Router } from "vue-router";
+import { createRouter, createMemoryHistory, type Router } from "vue-router";
 
 const routes: Array<any> = [];
 //@ts-ignore
@@ -9,7 +9,7 @@ for (const key in files) {
 }
 
 const router: Router = createRouter({
-  history: createWebHistory(),
+  history: createMemoryHistory(),
   routes: [...routes],
 });
 
