@@ -1,6 +1,14 @@
 <template>
   <div class="list">
     <div v-for="item in record" class="item">
+      <iframe
+        :src="`//player.bilibili.com/player.html?isOutside=true&${item.url}&p=1&&autoplay=0`"
+        scrolling="no"
+        border="0"
+        frameborder="no"
+        framespacing="0"
+        allowfullscreen="true"
+      ></iframe>
       <div class="item-city">{{ item.city }}</div>
       <div class="item-name">
         <img :src="avatar" alt="" />
@@ -31,6 +39,9 @@ import { record, nickname } from "../../../config/travel";
   border-radius: 4px;
   margin-bottom: 4px;
   width: calc(50% - 4px);
+  iframe {
+    width: 100%;
+  }
   &:nth-child(2n) {
     margin-left: 4px;
   }
