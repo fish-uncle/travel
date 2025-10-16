@@ -8,9 +8,9 @@
           <img :src="avatar" alt="avatar" />
         </div>
         <div class="avatar-right">
-          <h1 class="name">{{ name }}</h1>
+          <h1 class="name">{{ nickname }}</h1>
           <div class="avatar-info">
-            <ul v-for="row in list">
+            <ul v-for="row in account">
               <li v-for="(item, index) in row" :key="index">
                 <div class="icon" v-html="item.icon" />
                 <span>{{ item.label }}</span>
@@ -20,18 +20,18 @@
           </div>
         </div>
       </div>
-      <div class="avatar-center">Night fuels dream; Day fuels fight.</div>
+      <div class="avatar-center">{{ introduction }}</div>
       <div class="avatar-bottom">
         <div class="avatar-bottom-item">
-          <a>99w+</a>
+          <a>{{ FollowingNumber }}</a>
           <span>Following</span>
         </div>
         <div class="avatar-bottom-item">
-          <a>99w+</a>
+          <a>{{ FollowersNumber }}</a>
           <span>Followers</span>
         </div>
         <div class="avatar-bottom-item">
-          <a>99w+</a>
+          <a>{{ LikesColNumber }}</a>
           <span>Likes & Col</span>
         </div>
         <btn class="btn">Following</btn>
@@ -40,25 +40,16 @@
   </header>
 </template>
 <script lang="ts" setup>
-import { ref } from "vue";
 import btn from "./btn.vue";
-import avatar from "../../../assets/images/avatar.jpeg";
-import tiktok from "../../../assets/svg/tiktok.svg?raw";
-import bilibili from "../../../assets/svg/bilibili.svg?raw";
-import wechat from "../../../assets/svg/wechat.svg?raw";
-import xiaohongshu from "../../../assets/svg/xiaohongshu.svg?raw";
-
-const name = ref("Fish Uncle");
-const list = ref([
-  [
-    { icon: xiaohongshu, label: "小红书号：", value: "fish_uncle" },
-    { icon: wechat, label: "视频号：", value: "Fish.Uncle" },
-  ],
-  [
-    { icon: tiktok, label: "抖音号：", value: "fish.uncle" },
-    { icon: bilibili, label: "哔哩哔哩号：", value: "Fish__Uncle" },
-  ],
-]);
+import {
+  FollowingNumber,
+  FollowersNumber,
+  LikesColNumber,
+  avatar,
+  nickname,
+  introduction,
+  account,
+} from "../../../config/travel";
 </script>
 <style lang="scss" scoped>
 header {

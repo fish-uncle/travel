@@ -1,6 +1,3 @@
-export const list = [
-  {
-    title: "20251006",
-    city: "马尔代夫",
-  },
-];
+export * from "./record";
+export * from "./base";
+export * from "./account";

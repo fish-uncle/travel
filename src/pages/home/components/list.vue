@@ -1,27 +1,45 @@
 <template>
   <div class="list">
-    <div v-for="item in list" class="item">
+    <div v-for="item in record" class="item">
+      <div class="item-city">{{ item.city }}</div>
       <div class="item-name">
         <img :src="avatar" alt="" />
-        <span>{{ name }}</span>
+        <span>{{ nickname }}</span>
+        <a>{{ item.time }}</a>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { ref } from "vue";
 import avatar from "../../../assets/images/avatar.jpeg";
-import { list } from "../../../config/travel";
-
-const name = ref("Fish Uncle");
+import { record, nickname } from "../../../config/travel";
 </script>
 <style lang="scss" scoped>
 .list {
   background-color: #f5f5f5;
-  height: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  height: calc(100vh - 230px);
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 .item {
+  background-color: #fff;
   border-radius: 4px;
+  margin-bottom: 4px;
+  width: calc(50% - 4px);
+  &:nth-child(2n) {
+    margin-left: 4px;
+  }
+}
+.item-city {
+  padding: 12px 12px 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
 }
 .item-name {
   padding: 12px;
@@ -32,10 +50,16 @@ const name = ref("Fish Uncle");
     border-radius: 20px;
     height: 20px;
   }
+  a {
+    font-size: 12px;
+    margin-left: auto;
+    color: #333;
+  }
   span {
     margin-left: 6px;
     font-size: 12px;
     font-weight: 400;
+    color: #333;
   }
 }
 </style>
