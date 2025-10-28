@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-      <div class="avatar-center">{{ introduction }}</div>
+      <div class="avatar-center" v-html="introduction"></div>
       <div class="avatar-bottom">
         <div class="avatar-bottom-item">
           <a>{{ FollowingNumber }}</a>
@@ -53,7 +53,7 @@ import {
 </script>
 <style lang="scss" scoped>
 header {
-  height: 230px;
+  height: 280px;
   position: relative;
   padding: 16px;
 }

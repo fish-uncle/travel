@@ -1,14 +1,7 @@
 <template>
   <div class="list">
     <div v-for="item in record" class="item">
-      <iframe
-        :src="`//player.bilibili.com/player.html?isOutside=true&${item.url}&p=1&&autoplay=0`"
-        scrolling="no"
-        border="0"
-        frameborder="no"
-        framespacing="0"
-        allowfullscreen="true"
-      ></iframe>
+      <img :src="item.url" />
       <div class="item-city">{{ item.city }}</div>
       <div class="item-name">
         <img :src="avatar" alt="" />
@@ -19,8 +12,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import avatar from "../../../assets/images/avatar.jpeg";
-import { record, nickname } from "../../../config/travel";
+import { record, nickname, avatar } from "../../../config/travel";
 </script>
 <style lang="scss" scoped>
 .list {
@@ -39,7 +31,8 @@ import { record, nickname } from "../../../config/travel";
   border-radius: 4px;
   margin-bottom: 4px;
   width: calc(50% - 4px);
-  iframe {
+  img {
+    border-radius: 4px 4px 0 0;
     width: 100%;
   }
   &:nth-child(2n) {
