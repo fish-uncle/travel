@@ -53,7 +53,7 @@ import {
 </script>
 <style lang="scss" scoped>
 header {
-  height: 280px;
+  height: 260px;
   position: relative;
   padding: 16px;
 }

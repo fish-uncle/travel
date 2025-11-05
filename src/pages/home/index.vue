@@ -14,5 +14,8 @@ import list from "./components/list.vue";
 .container {
   max-width: 600px;
   margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>
